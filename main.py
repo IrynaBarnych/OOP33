@@ -23,16 +23,21 @@ class LinkedList:
         self.head = None
 
     def __str__(self):
-        return f"{self.head}"
+        result = ""
+        current = self.head
+        while current:
+            result += f"{current.data} -> "
+            current = current.next
+        return result + "None"
 
     def append(self, data):
         new_node = Node(data)
         if self.head is None:
-            self.head = new_node #новий елемент стає початком
+            self.head = new_node
             return
         last_node = self.head
         while last_node.next:
-            last_node = last_node.next #переміщуємося до наступного елементу
+            last_node = last_node.next
         last_node.next = new_node
 
     def replace(self, old_data, new_data):
@@ -45,13 +50,52 @@ class LinkedList:
             current = current.next
         print(f"Значення {old_data} не знайдено у списку")
 
+
 my_lst = LinkedList()
 nums = input("Введіть усі числа через пробіл ").split()
 for num in nums:
     my_lst.append(int(num))
 print(my_lst)
-#сюди пункти меню
-#Замінити значення у списку
+
+while True:
+    print("\nМеню:")
+    print("1. Додати елемент до списку.")
+    print("2. Видалити елемент зі списку.")
+    print("3. Показати вміст списку.")
+    print("4. Перевірити, чи є значення у списку.")
+    print("5. Замінити значення у списку.")
+    print("6. Вийти")
+
+    choice = int(input("Оберіть опцію: "))
+
+    if choice == 1:
+        element = int(input("Додайте елемент до списку: "))
+        my_lst.append(element)
+    elif choice == 2:
+        # Тут ви маєте видалити елемент, але у вас використовується невизначена черга "boarding_queue",
+        # вам потрібно виправити цей рядок, наприклад:
+        element = int(input("Видаліть елемент зі списку: "))
+        my_lst.remove(element)
+    elif choice == 3:
+        print("Показати вміст списку:")
+        print(my_lst)
+    elif choice == 4:
+        value_to_check = int(input("Чи є значення у списку: "))
+        if value_to_check in my_lst:
+            print(f"Значення {value_to_check} знаходиться у списку.")
+        else:
+            print(f"Значення {value_to_check} не знайдено у списку.")
+    elif choice == 5:
+        old_value = int(input("Введіть значення, яке треба замінити: "))
+        new_value = int(input("Введіть значення, на яке замінити: "))
+        my_lst.replace(old_value, new_value)
+    elif choice == 6:
+        print("До побачення!")
+        break
+    else:
+        print("Неправильний вибір. Оберіть опцію від 1 до 6.")
+
+# Замінити значення у списку
 old_value = int(input("Введіть значення, яке треба замінити: "))
 new_value = int(input("Введіть значення, на яке замінити: "))
 my_lst.replace(old_value, new_value)
