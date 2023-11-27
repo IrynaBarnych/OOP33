@@ -40,6 +40,25 @@ class LinkedList:
             last_node = last_node.next
         last_node.next = new_node
 
+
+    def remove(self, data):
+        current = self.head
+        prev = None
+
+        while current:
+            if current.data == data:
+                if prev:
+                    prev.next = current.next
+                else:
+                    self.head = current.next
+                print(f"Значення {data} видалено")
+                return
+            prev = current
+            current = current.next
+
+        print(f"Значення {data} не знайдено у списку")
+
+
     def replace(self, old_data, new_data):
         current = self.head
         while current:
@@ -72,8 +91,6 @@ while True:
         element = int(input("Додайте елемент до списку: "))
         my_lst.append(element)
     elif choice == 2:
-        # Тут ви маєте видалити елемент, але у вас використовується невизначена черга "boarding_queue",
-        # вам потрібно виправити цей рядок, наприклад:
         element = int(input("Видаліть елемент зі списку: "))
         my_lst.remove(element)
     elif choice == 3:
