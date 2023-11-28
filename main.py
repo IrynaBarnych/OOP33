@@ -40,11 +40,9 @@ class LinkedList:
             last_node = last_node.next
         last_node.next = new_node
 
-
     def remove(self, data):
         current = self.head
         prev = None
-
         while current:
             if current.data == data:
                 if prev:
@@ -55,9 +53,15 @@ class LinkedList:
                 return
             prev = current
             current = current.next
-
         print(f"Значення {data} не знайдено у списку")
 
+    def contains(self, value):
+        current = self.head
+        while current:
+            if current.data == value:
+                return True
+            current = current.next
+        return False
 
     def replace(self, old_data, new_data):
         current = self.head
@@ -69,9 +73,9 @@ class LinkedList:
             current = current.next
         print(f"Значення {old_data} не знайдено у списку")
 
-
+# Створення списку
 my_lst = LinkedList()
-nums = input("Введіть усі числа через пробіл ").split()
+nums = input("Введіть усі числа через пробіл: ").split()
 for num in nums:
     my_lst.append(int(num))
 print(my_lst)
@@ -97,11 +101,11 @@ while True:
         print("Показати вміст списку:")
         print(my_lst)
     elif choice == 4:
-        value_to_check = int(input("Чи є значення у списку: "))
-        if value_to_check in my_lst:
-            print(f"Значення {value_to_check} знаходиться у списку.")
+        number = int(input("Чи є значення у списку: "))
+        if my_lst.contains(number):
+            print(f"Значення {number} знаходиться у списку.")
         else:
-            print(f"Значення {value_to_check} не знайдено у списку.")
+            print(f"Значення {number} не знайдено у списку.")
     elif choice == 5:
         old_value = int(input("Введіть значення, яке треба замінити: "))
         new_value = int(input("Введіть значення, на яке замінити: "))
@@ -111,9 +115,3 @@ while True:
         break
     else:
         print("Неправильний вибір. Оберіть опцію від 1 до 6.")
-
-# Замінити значення у списку
-old_value = int(input("Введіть значення, яке треба замінити: "))
-new_value = int(input("Введіть значення, на яке замінити: "))
-my_lst.replace(old_value, new_value)
-print(my_lst)
