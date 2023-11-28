@@ -14,10 +14,11 @@
 class Node:
     def __init__(self, data):
         self.data = data
+        self.prev = None
         self.next = None
 
     def __str__(self):
-        return f"[{self.data}] -> {self.next}"
+        return f"[{self.data}] <->"
 
 class LinkedList:
     def __init__(self):
@@ -27,32 +28,34 @@ class LinkedList:
         result = ""
         current = self.head
         while current:
-            result += f"{current.data} -> "
+            result += f" {current.data} <->"
             current = current.next
-        return result + "None"
+        return result + " None"
 
     def append(self, data):
         new_node = Node(data)
         if self.head is None:
             self.head = new_node
-            return
-        last_node = self.head
-        while last_node.next:
-            last_node = last_node.next
-        last_node.next = new_node
+        else:
+            last_node = self.head
+            while last_node.next:
+                last_node = last_node.next
+            new_node.prev = last_node
+            last_node.next = new_node
 
     def remove(self, data):
         current = self.head
-        prev = None
         while current:
             if current.data == data:
-                if prev:
-                    prev.next = current.next
+                if current.prev:
+                    current.prev.next = current.next
                 else:
                     self.head = current.next
+
+                if current.next:
+                    current.next.prev = current.prev
                 print(f"Значення {data} видалено")
                 return
-            prev = current
             current = current.next
         print(f"Значення {data} не знайдено у списку")
 
@@ -74,7 +77,6 @@ class LinkedList:
             current = current.next
         print(f"Значення {old_data} не знайдено у списку")
 
-# Створення списку
 my_lst = LinkedList()
 nums = input("Введіть усі числа через пробіл: ").split()
 for num in nums:
