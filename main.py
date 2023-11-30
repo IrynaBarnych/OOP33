@@ -94,14 +94,24 @@ while True:
     print("5. Замінити значення у списку.")
     print("6. Вийти")
 
-    choice = int(input("Оберіть опцію: "))
+    try:
+        choice = int(input("Оберіть опцію: "))
+    except ValueError:
+        print("Введіть правильне ціле число.")
+        continue
 
     if choice == 1:
-        element = int(input("Додайте елемент до списку: "))
-        my_lst.append(element)
+        try:
+            element = int(input("Додайте елемент до списку: "))
+            my_lst.append(element)
+        except ValueError:
+            print("Введіть правильне ціле число.")
     elif choice == 2:
-        element = int(input("Видаліть елемент зі списку: "))
-        my_lst.remove(element)
+        try:
+            element = int(input("Видаліть елемент зі списку: "))
+            my_lst.remove(element)
+        except ValueError:
+            print("Введіть правильне ціле число.")
     elif choice == 3:
         print("Показати вміст списку:")
         print(my_lst)
